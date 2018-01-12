@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.prithwi.mplay.fragments.PlayListFragment">
+
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal">
+
+    <Button
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/bt_create_playlist"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/ripple"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_create_playlist"
+        android:text="Create Playlist"/>
+
+  </LinearLayout>
+
+
+
+
+  <ListView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@android:id/list"
+      android:layout_marginTop="3dp"
+      android:dividerHeight="2dp">
+
+  </ListView>
+
+
+</LinearLayout>
