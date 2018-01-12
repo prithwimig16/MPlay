@@ -3,6 +3,7 @@ package com.example.prithwi.mplay.adapters;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.prithwi.mplay.R;
@@ -79,20 +81,26 @@ public class SongAdapter extends ArrayAdapter {
             holder.artistName.setText(mPlaySong.getArtist());
                 holder.artistName.setTypeface(Config.OpenSans_Regular);
             String s=mPlaySong.getData();
-//
-//                FFmpegMediaMetadataRetriever retriever = new FFmpegMediaMetadataRetriever();
-//                retriever.setDataSource(String.valueOf(Uri.parse(mPlaySong.getData())));
-//                byte [] data = retriever.getEmbeddedPicture();
-//                if(data!=null){
-//
-//// convert the byte array to a bitmap
-//                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-//// do something with the image ...
-//                holder.mp3Img.setImageBitmap(bitmap);
-//
-//                retriever.release();
-//                }
 
+                android.media.MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+                Uri uri= Uri.parse(mPlaySong.getData());
+                mmr.setDataSource(context,uri);
+
+                byte [] data = mmr.getEmbeddedPicture();
+                //coverart is an Imageview object
+
+                // convert the byte array to a bitmap
+                if(data != null)
+                {
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    holder.mp3Img.setImageBitmap(bitmap); //associated cover art in bitmap
+
+                }
+                else
+                {
+                    holder.mp3Img.setImageResource(R.drawable.blankimage); //any default cover resourse folder
+
+                }
             }
         }
 

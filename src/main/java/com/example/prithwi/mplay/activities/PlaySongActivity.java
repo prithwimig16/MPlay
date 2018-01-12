@@ -66,19 +66,22 @@ public class PlaySongActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void updateUi(){
-//        FFmpegMediaMetadataRetriever retriever = new FFmpegMediaMetadataRetriever();
-//        retriever.setDataSource(String.valueOf(Uri.parse(songObj.getData())));
-//        byte [] data = retriever.getEmbeddedPicture();
-//
-//        if(data!=null&&data.length>0){
-//            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-//
-//
-//            BitmapDrawable bitmapDrawable = new BitmapDrawable(bitmap);
-//            rel.setBackground(bitmapDrawable);
-//
-//            retriever.release();
-//        }
+
+
+        android.media.MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        mmr.setDataSource(String.valueOf(Uri.parse(songObj.getData())));
+
+        byte [] data = mmr.getEmbeddedPicture();
+        //coverart is an Imageview object
+
+        // convert the byte array to a bitmap
+        if(data != null)
+        {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            BitmapDrawable bitmapDrawable = new BitmapDrawable(bitmap);
+            rel.setBackground(bitmapDrawable);
+        }
+
         this.tvSongInfo.setText(songObj.getTitle());
         this.tvSinger.setText(songObj.getArtist());
 
